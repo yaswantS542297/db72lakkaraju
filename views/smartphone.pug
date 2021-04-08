@@ -1,0 +1,31 @@
+extends layout
+
+block content
+  h1= title
+  p smartphone is very useful for this generation.
+  div(class="container-fluid")
+        div(class="row")
+            -
+                let smartphone = [
+                    {
+                        "name": "pro",
+                        "cost":1100,
+                        "brand": "Iphone"                        
+                    },
+                    {
+                        "name": "ultraseries",
+                        "cost": 800,
+                        "brand": "samsung"
+                    },
+                    {
+                        "name": "promax",
+                        "cost": 1200,
+                        "brand": "Iphone"
+                    },                   
+                ]
+            each v in smartphone
+                div(class="col-sm-2") #{v.name}
+                br
+                br
+                div(class="col-sm-2") #{v.cost}
+                div(class="col-sm-2") #{v.brand}
