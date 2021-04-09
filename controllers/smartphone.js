@@ -14,10 +14,20 @@ exports.smartphone_list = async function(req, res) {
     res.error(500,`{"error": ${err}}`);
     }
     };
-// for a specific Smartphone.
-exports.smartphone_detail = function(req, res) {
- res.send('NOT IMPLEMENTED: smartphone detail: ' + req.params.id);
+// for a specific Costume.
+exports.smartphone_detail = async function(req, res) {
+    console.log("detail"  + req.params.id)
+    try {
+        result = await smartphone.findById( req.params.id)
+        res.send(result)
+    } catch (error) {
+        res.status(500)
+        res.send(`{"error": document for id ${req.params.id} not found`);
+    }
 };
+
+
+
 // Handle Smartphone create on POST.
 //exports.smartphone_create_post = function(req, res) {
 // res.send('NOT IMPLEMENTED: smartphone create POST');
@@ -48,10 +58,26 @@ exports.smartphone_create_post = async function(req, res) {
 exports.smartphone_delete = function(req, res) {
  res.send('NOT IMPLEMENTED: smartphone delete DELETE ' + req.params.id);
 };
-// Handle Smartphone update form on PUT.
-exports.smartphone_update_put = function(req, res) {
- res.send('NOT IMPLEMENTED: smartphone update PUT' + req.params.id);
+
+// Handle Costume update form on PUT.
+exports.smartphone_update_put = async function(req, res) {
+    console.log(`update on id ${req.params.id} with body ${JSON.stringify(req.body)}`)
+    try {
+        let toUpdate = await smartphone.findById( req.params.id)
+        // Do updates of properties
+        if(req.body.name) toUpdate.name = req.body.name;
+        if(req.body.brand) toUpdate.brand = req.body.brand;
+        if(req.body.cost) toUpdate.cost = req.body.cost;
+        let result = await toUpdate.save();
+        console.log("Sucess " + result)
+        res.send(result)
+    } catch (err) {
+        res.status(500)
+        res.send(`{"error": ${err}: Update for id ${req.params.id} failed`);
+    }
 };
+
+
 
 // VIEWS
 // Handle a show all view
