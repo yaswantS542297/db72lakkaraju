@@ -11,6 +11,8 @@ module.exports = router;
 /* GET detail smartphone page */
 router.get('/detail', smartphone_controlers.smartphone_view_one_Page);
 
+/* GET create smartphone page */
+router.get('/create', smartphone_controlers.smartphone_create_Page);
 
 
 

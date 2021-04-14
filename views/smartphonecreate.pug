@@ -1,0 +1,34 @@
+extends layout
+
+block content
+  h1= title
+
+  form(id='smartphoneForm', action="/resource/smartphone", method="POST")
+    div.form-group
+        label.smartphoneAttr(for='smartphonename') smartphone name
+        input#smartphonename(type='text', name='smartphonename')
+    div.form-group
+        label.smartphoneAttr(for='brand') smartphone brand
+        input#brand(type='text', name='brand')
+    div.form-group
+        label.smartphoneAttr(for='cost') smartphone cost
+        input#cost(type='number', name='cost')
+    input(type="submit")
+
+  script.
+    document.forms['smartphoneForm'].addEventListener('submit', (event) => {
+      event.preventDefault();
+      // TODO do something here to show user that form is being submitted
+      fetch(event.target.action, {
+        method: 'POST',
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+      }).then((resp) => {
+        return resp.json(); // or resp.text() or whatever the server sends
+      }).then((body) => {
+        alert("Save succeded")
+        // TODO handle body
+      }).catch((error) => {
+        // TODO handle error
+        alert("Save failed " + error )
+      });
+    });
