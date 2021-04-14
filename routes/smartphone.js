@@ -8,3 +8,9 @@ var router = express.Router();
 router.get('/', smartphone_controlers.smartphone_view_all_Page);
 module.exports = router;
 
+/* GET detail smartphone page */
+router.get('/detail', smartphone_controlers.smartphone_view_one_Page);
+
+
+
+

@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  h1= title
+
+  - let smartphoneid = toShow._id
+  - let smartphonename = toShow.name
+  - let smartphonebrand = toShow.brand
+  - let smartphonecost = toShow.cost
+  div
+    div.row
+      div(class='smartphoneAttr mr-3') smartphone ID is:
+      div #{smartphoneid}
+    div.row
+      div(class='smartphoneAttr mr-3') smartphone name is:
+      div #{smartphonename}
+    div.row
+      div(class='smartphoneAttr mr-3') smartphone brand is:
+      div #{smartphonebrand}
+    div.row
+      div(class='smartphoneAttr mr-3') smartphone cost is:
+      div #{smartphonecost}
+

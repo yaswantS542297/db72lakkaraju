@@ -54,10 +54,19 @@ exports.smartphone_create_post = async function(req, res) {
     };
 
 
-// Handle Smartphone delete form on DELETE.
-exports.smartphone_delete = function(req, res) {
- res.send('NOT IMPLEMENTED: smartphone delete DELETE ' + req.params.id);
+// Handle Smartphone delete on DELETE.
+exports.smartphone_delete = async function(req, res) {
+    console.log("delete "  + req.params.id)
+    try {
+        result = await smartphone.findByIdAndDelete( req.params.id)
+        console.log("Removed " + result)
+        res.send(result)
+    } catch (err) {
+        res.status(500)
+        res.send(`{"error": Error deleting ${err}}`);
+    }
 };
+
 
 // Handle Costume update form on PUT.
 exports.smartphone_update_put = async function(req, res) {
@@ -90,3 +99,17 @@ exports.smartphone_view_all_Page = async function(req, res) {
     res.error(500,`{"error": ${err}}`);
     }
     };
+
+    // Handle a show one view with id specified by query
+exports.smartphone_view_one_Page = async function(req, res) {
+    console.log("single view for id "  + req.query.id)
+    try{
+        result = await smartphone.findById( req.query.id)
+        res.render('smartphonedetail', 
+{ title: 'smartphone Detail', toShow: result });
+    }
+    catch(err){
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+    }
+};
