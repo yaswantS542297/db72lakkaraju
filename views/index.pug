@@ -1,14 +1,12 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  P I love to play pubg Game.
-  button(type="button", class="btn btn-primary", onclick="update()") press me
-  div(id="target") Display
-  script.  
-    var client_count = 0
-    function update(){
-      client_count++;
-      document.getElementById("target").innerHTML = `Value now ${client_count}`
-    }
+  if (!user)
+   a(href="/login") Login
+   br
+   a(href="/register") Register
+  if (user)
+   p You are currently logged in as #{user.username}
+   a(href="/smartphone") Take me to smartphone
+   br
+   a(href="/logout") Logout

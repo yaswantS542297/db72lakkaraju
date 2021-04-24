@@ -2,14 +2,17 @@ extends layout
 
 block content
   h1= title
-  p smartphone is very useful for this generation.
+
   div(class="container-fluid")
         div(class="row")
             -
-                let smartphones = results
-            each v in smartphones
-                div(class="col-sm-2") #{v.name}
-                br
-                br
-                div(class="col-sm-2") #{v.cost}
-                div(class="col-sm-2") #{v.brand}
+                 let smartphones = results
+            each item in smartphones
+                - let destination = `dispatch(\"/smartphones/update?id=${item._id}\")`
+                div(class="row-sm-2", class="m-1") Item #{item.smartphonename}(#{item.brand}) is #{item.cost}
+                    button.btn( class="btn-primary ml-1", onclick=destination) Update
+            script.
+                function dispatch(path){
+                    window.location.href = path
+                }
+

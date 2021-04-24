@@ -7,22 +7,11 @@ var smartphone = require('../models/smartphone');
 // List of all Costumes
 exports.smartphone_list = async function(req, res) {
     try{
-    thesmartphones = await smartphone.find();
-    res.send(thesmartphones);
+    thesmartphone = await smartphone.find();
+    res.send(thesmartphone);
     }
     catch(err){
     res.error(500,`{"error": ${err}}`);
-    }
-    };
-// for a specific Costume.
-exports.smartphone_detail = async function(req, res) {
-    console.log("detail"  + req.params.id)
-    try {
-        result = await smartphone.findById( req.params.id)
-        res.send(result)
-    } catch (error) {
-        res.status(500)
-        res.send(`{"error": document for id ${req.params.id} not found`);
     }
 };
 
@@ -92,13 +81,26 @@ exports.smartphone_update_put = async function(req, res) {
 // Handle a show all view
 exports.smartphone_view_all_Page = async function(req, res) {
     try{
-    smartphone = await smartphone.find();
-    res.render('smartphone', { title: 'smartphone Search Results', results: smartphones });
+    thesmartphone = await smartphone.find();
+    res.render('smartphone', { title: 'smartphone Search Results', results: thesmartphone });
     }
     catch(err){
     res.error(500,`{"error": ${err}}`);
     }
     };
+
+    // for a specific Costume.
+exports.smartphone_detail = async function(req, res) {
+    console.log("detail"  + req.params.id)
+    try {
+        result = await smartphone.findById( req.params.id)
+        res.send(result)
+    } catch (error) {
+        res.status(500)
+        res.send(`{"error": document for id ${req.params.id} not found`);
+    }
+};
+
 
     // Handle a show one view with id specified by query
 exports.smartphone_view_one_Page = async function(req, res) {

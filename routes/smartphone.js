@@ -6,7 +6,6 @@ var router = express.Router();
 
 /* GET smartphones */
 router.get('/', smartphone_controlers.smartphone_view_all_Page);
-module.exports = router;
 
 /* GET detail smartphone page */
 router.get('/detail', smartphone_controlers.smartphone_view_one_Page);
@@ -20,3 +19,4 @@ router.get('/update', smartphone_controlers.smartphone_update_Page);
 /* GET create smartphone page */
 router.get('/delete', smartphone_controlers.smartphone_delete_Page);
 
+module.exports = router;

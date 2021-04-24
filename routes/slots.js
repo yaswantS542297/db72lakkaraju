@@ -5,4 +5,5 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
     res.render('slots', { title: 'Slot Machine' });
 });
+
 module.exports = router;
