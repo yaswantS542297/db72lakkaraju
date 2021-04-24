@@ -1,18 +1,26 @@
 extends layout
 
 block content
-  h1= title
+  - let create = `dispatch(\"/smartphone/create\")`
+  button.btn(class="btn-primary mb-2" onclick=create) Add a Phone
+    h1= title
 
-  div(class="container-fluid")
+    
+    div(class="container-fluid")
         div(class="row")
             -
-                 let smartphones = results
-            each item in smartphones
-                - let destination = `dispatch(\"/smartphones/update?id=${item._id}\")`
-                div(class="row-sm-2", class="m-1") Item #{item.smartphonename}(#{item.brand}) is #{item.cost}
-                    button.btn( class="btn-primary ml-1", onclick=destination) Update
+                let smartphone = results
+            each v in smartphone
+                - let destination = `dispatch(\"/smartphone/update?id=${v._id}\")`
+                - let detail = `dispatch(\"/smartphone/detail?id=${v._id}\")`
+                - let del = `dispatch(\"/smartphone/delete?id=${v._id}\")`
+
+                div(class="row-sm-2" class='m-1') SmartPhone #{v.name}(#{v.brand}) is #{v.cost}
+                    button.btn(class="btn-success ml-1", onclick=detail) Detail
+                    button.btn(class="btn-primary ml-1", onclick=destination) Update
+                    button.btn(class="btn-danger ml-1", onclick=del) Delete
+                
             script.
                 function dispatch(path){
                     window.location.href = path
                 }
-

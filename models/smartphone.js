@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 const smartphoneSchema = mongoose.Schema({
 name: {
     type: String,
-    minLength: 10
+    minLength: 0
         },
 brand: String,
 cost :{ 
