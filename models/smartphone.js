@@ -1,8 +1,14 @@
 const mongoose = require("mongoose")
 const smartphoneSchema = mongoose.Schema({
-name: String,
+name: {
+    type: String,
+    minLength: 10
+        },
 brand: String,
-cost: Number,
-
+cost :{ 
+    type: Number,
+    min:1,
+    max:100,
+}
 })
 module.exports = mongoose.model("smartphone", smartphoneSchema)
